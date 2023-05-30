@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-4a65d726c04c18b176d3.json",
+			"jsonFile" : "cache-v2-baa44618bb669f8a002c.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -44,7 +44,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cmakeFiles-v1-0fbbe93183bef0560f51.json",
+			"jsonFile" : "cmakeFiles-v1-a7ffc6f8bf1ed76651c1.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -53,7 +53,7 @@
 			}
 		},
 		{
-			"jsonFile" : "toolchains-v1-22e5552e3910a0682da4.json",
+			"jsonFile" : "toolchains-v1-a7ffc6f8bf1ed76651c1.json",
 			"kind" : "toolchains",
 			"version" : 
 			{
@@ -66,6 +66,10 @@
 	{
 		"client-vscode" : 
 		{
+			"query 2.json" : 
+			{
+				"error" : "unknown query file"
+			},
 			"query.json" : 
 			{
 				"requests" : 
@@ -90,7 +94,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-4a65d726c04c18b176d3.json",
+						"jsonFile" : "cache-v2-baa44618bb669f8a002c.json",
 						"kind" : "cache",
 						"version" : 
 						{
@@ -108,7 +112,7 @@
 						}
 					},
 					{
-						"jsonFile" : "toolchains-v1-22e5552e3910a0682da4.json",
+						"jsonFile" : "toolchains-v1-a7ffc6f8bf1ed76651c1.json",
 						"kind" : "toolchains",
 						"version" : 
 						{
@@ -117,7 +121,7 @@
 						}
 					},
 					{
-						"jsonFile" : "cmakeFiles-v1-0fbbe93183bef0560f51.json",
+						"jsonFile" : "cmakeFiles-v1-a7ffc6f8bf1ed76651c1.json",
 						"kind" : "cmakeFiles",
 						"version" : 
 						{
