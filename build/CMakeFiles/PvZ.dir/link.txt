@@ -1,0 +1,1 @@
+/usr/bin/aarch64-linux-gnu-g++ -O3 -DNDEBUG CMakeFiles/PvZ.dir/src/main.cpp.o -o bin/PvZ  -Wl,-rpath,/media/psf/Home/Desktop/PvZ/build/lib lib/libFramework.a lib/libGameWorld.a lib/libGameObject.a lib/libFramework.a lib/libglut.so.3.11.1 /usr/lib/aarch64-linux-gnu/libGL.so -lm /usr/lib/aarch64-linux-gnu/libX11.so /usr/lib/aarch64-linux-gnu/libXi.so lib/libSOIL.a 
