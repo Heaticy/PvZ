@@ -25,7 +25,7 @@ void Sun::Update()
 }
 void Seed::OnClick()
 {
-    if (!m_gw->GetShovel())
+    if (m_gw->GetHand())
     {
         return;
     }
@@ -35,6 +35,45 @@ void Seed::OnClick()
     }
     else
     {
+        m_gw->SetSun(m_gw->GetSun() - m_price);
+        SetSeed();
         m_gw->addCooldowndmask(GetX(), GetY(), m_cd);
     }
+}
+
+void PlantingSpot::OnClick()
+{
+    switch (m_gw->GetHand())
+    {
+    case NOTHING:
+        break;
+    case SUNFLOWERSEED:
+        m_gw->addobject(std::make_shared<Sunflower>(GetX(), GetY(), m_gw));
+        break;
+
+    default:
+        break;
+    }
+}
+
+void Sunflower::Update()
+{
+    if (!suntimecorder)
+    {
+        m_gw->addobject(std::make_shared<Sun>(GetX(), GetX(), 0, m_gw));
+        suntimecorder = 600;
+    }
+    suntimecorder -= 1;
+}
+void Sunflower::OnClick()
+{
+    if (m_gw->GetHand() == SHOVEL)
+    {
+        SetHp(0);
+    }
+}
+
+void SunflowerSeed::SetSeed()
+{
+    m_gw->Sethand(SUNFLOWERSEED);
 }

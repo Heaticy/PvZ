@@ -9,8 +9,9 @@
 #include <filesystem>
 static const std::string ASSET_DIR = (std::filesystem::current_path().parent_path() / "assets").string(); // Same as "../assets/"
 
-// Returns a random integer within [min, max] (inclusive). 
-inline int randInt(int min, int max) {
+// Returns a random integer within [min, max] (inclusive).
+inline int randInt(int min, int max)
+{
   if (max < min)
     std::swap(max, min);
   static std::random_device rd;
@@ -19,15 +20,17 @@ inline int randInt(int min, int max) {
   return distro(generator);
 }
 
-enum class LevelStatus {
+enum class LevelStatus
+{
   ONGOING,
   LOSING
 };
 
-enum class KeyCode {
+enum class KeyCode
+{
   NONE,
-  ENTER,    // Enter
-  QUIT      // Esc
+  ENTER, // Enter
+  QUIT   // Esc
 };
 
 const int WINDOW_WIDTH = 800;
@@ -40,7 +43,6 @@ const int FIRST_ROW_CENTER = 75;
 const int FIRST_COL_CENTER = 75;
 const int GAME_ROWS = 5;
 const int GAME_COLS = 9;
-
 
 using ImageID = int;
 
@@ -67,7 +69,6 @@ const ImageID IMGID_PEA = 40;
 const ImageID IMGID_EXPLOSION = 41;
 const ImageID IMGID_ZOMBIES_WON = 99;
 
-
 using AnimID = int;
 
 const AnimID ANIMID_NO_ANIMATION = -1;
@@ -76,7 +77,6 @@ const AnimID ANIMID_WALK_ANIM = 1;
 const AnimID ANIMID_EAT_ANIM = 2;
 const AnimID ANIMID_RUN_ANIM = 3;
 const AnimID ANIMID_JUMP_ANIM = 4;
-
 
 const int MAX_LAYERS = 7;
 using LayerID = int;
@@ -91,5 +91,8 @@ const LayerID LAYER_BACKGROUND = 6;
 
 const int MS_PER_FRAME = 33;
 
-
+using SeedID = int;
+const SeedID SUNFLOWERSEED = 1;
+const SeedID NOTHING = 0;
+const SeedID SHOVEL = -1;
 #endif // !UTILS_HPP__

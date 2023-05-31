@@ -14,7 +14,7 @@ private:
 
 public:
   Random() : generator(rd()), distribution(63, 263) {}
-
+  Random(int x, int y) : generator(rd()), distribution(x, y) {}
   int generateRandomNumber()
   {
     return distribution(generator);
@@ -88,13 +88,16 @@ private:
 class PlantingSpot : public GameObject
 {
 public:
-  PlantingSpot(int x, int y) : GameObject(IMGID_NONE, x, y, LAYER_UI, 60, 80, ANIMID_NO_ANIMATION) {}
-  void OnClick() {}
+  PlantingSpot(int x, int y, pGameWorld gw) : GameObject(IMGID_NONE, x, y, LAYER_UI, 60, 80, ANIMID_NO_ANIMATION), m_gw(gw) {}
+  void OnClick();
   void Update() {}
   int isZombie()
   {
     return -1;
   }
+
+private:
+  pGameWorld m_gw;
 };
 
 class CooldownMask : public GameObject
@@ -122,6 +125,8 @@ class Seed : public GameObject
 private:
   int m_price;
   int m_cd;
+
+protected:
   pGameWorld m_gw;
 
 public:
@@ -136,11 +141,35 @@ public:
   }
   void OnClick();
   void Update() {}
+  virtual void SetSeed() = 0;
 };
 
 class SunflowerSeed : public Seed
 {
 public:
   SunflowerSeed(pGameWorld gw) : Seed(IMGID_SEED_SUNFLOWER, 130, WINDOW_HEIGHT - 44, LAYER_UI, 50, 70, ANIMID_NO_ANIMATION, 50, 240, gw) {}
+  void SetSeed();
 };
+
+class Sunflower : public GameObject
+{
+public:
+  Sunflower(int x, int y, pGameWorld gw) : GameObject(IMGID_SUNFLOWER, x, y, LAYER_PLANTS, 60, 80, ANIMID_IDLE_ANIM), m_gw(gw)
+  {
+    SetHp(300);
+    Random suntime(30, 600);
+    suntimecorder = suntime.generateRandomNumber();
+  }
+  void Update();
+  int isZombie()
+  {
+    return 0;
+  }
+  void OnClick();
+
+private:
+  int suntimecorder;
+  pGameWorld m_gw;
+};
+
 #endif // !GAMEOBJECT_HPP__

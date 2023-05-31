@@ -26,19 +26,19 @@ public:
   {
     GameObjects.push_back(object);
   }
-  void SetShovel(int shovel)
+  void Sethand(int hand)
   {
-    m_shovel = shovel;
+    m_hand = hand;
   }
-  int GetShovel()
+  int GetHand()
   {
-    return m_shovel;
+    return m_hand;
   }
   void addCooldowndmask(int x, int y, int cdtime);
 
 private:
   std::list<pGameObject> GameObjects;
-  int m_shovel = 0;
+  int m_hand = 0;
 };
 
 #endif // !GAMEWORLD_HPP__

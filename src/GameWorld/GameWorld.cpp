@@ -15,7 +15,7 @@ void GameWorld::Init()
   {
     for (size_t j = 0; j != 9; j++)
     {
-      addobject(std::make_shared<PlantingSpot>(FIRST_COL_CENTER + j * LAWN_GRID_WIDTH, FIRST_ROW_CENTER + i * LAWN_GRID_HEIGHT));
+      addobject(std::make_shared<PlantingSpot>(FIRST_COL_CENTER + j * LAWN_GRID_WIDTH, FIRST_ROW_CENTER + i * LAWN_GRID_HEIGHT, shared_from_this()));
     }
   }
   // Create Background
