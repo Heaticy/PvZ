@@ -61,6 +61,7 @@ LevelStatus GameWorld::Update()
     addobject(std::make_shared<Sun>(ran.generateRandomNumber(), WINDOW_HEIGHT - 1, 1, shared_from_this()));
   }
   UpdateObjects();
+  ClearDeadObjects();
   return LevelStatus::ONGOING;
 }
 
