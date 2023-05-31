@@ -184,24 +184,61 @@ public:
   void OnClick();
   void SetSeed();
 };
-class Sunflower : public GameObject
+
+class Plant : public GameObject
 {
 public:
-  Sunflower(int x, int y, pGameWorld gw) : GameObject(IMGID_SUNFLOWER, x, y, LAYER_PLANTS, 60, 80, ANIMID_IDLE_ANIM), m_gw(gw)
-  {
-    SetHp(300);
-    Random suntime(30, 600);
-    suntimecorder = suntime.generateRandomNumber();
-  }
-  void Update();
+  Plant(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID, pGameWorld gw) : GameObject(imageID, x, y, layer, width, height, animID), m_gw(gw) {}
   int isZombie()
   {
     return 0;
   }
   void OnClick();
 
+protected:
+  pGameWorld m_gw;
+};
+
+class Sunflower : public Plant
+{
+public:
+  Sunflower(int x, int y, pGameWorld gw) : Plant(IMGID_SUNFLOWER, x, y, LAYER_PLANTS, 60, 80, ANIMID_IDLE_ANIM, gw)
+  {
+    SetHp(300);
+    Random suntime(30, 600);
+    suntimecorder = suntime.generateRandomNumber();
+  }
+  void Update();
+
 private:
   int suntimecorder;
+};
+
+class Peashooter : public Plant
+{
+public:
+  Peashooter(int x, int y, pGameWorld gw) : Plant(IMGID_PEASHOOTER, x, y, LAYER_PLANTS, 60, 80, ANIMID_IDLE_ANIM, gw)
+  {
+    SetHp(300);
+  }
+  void Update();
+
+private:
+  int shoottime = 0;
+};
+
+class Pea : public GameObject
+{
+public:
+  int isZombie()
+  {
+    return 2;
+  }
+  Pea(int x, int y, pGameWorld gw) : GameObject(IMGID_PEA, x, y, LAYER_PROJECTILES, 28, 28, ANIMID_NO_ANIMATION), m_gw(gw) {}
+  void Update();
+  void OnClick() {}
+
+private:
   pGameWorld m_gw;
 };
 

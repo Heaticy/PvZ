@@ -52,7 +52,10 @@ void PlantingSpot::OnClick()
         m_gw->addobject(std::make_shared<Sunflower>(GetX(), GetY(), m_gw));
         m_gw->Sethand(NOTHING);
         break;
-
+    case PEASHOOTERSEED:
+        m_gw->addobject(std::make_shared<Peashooter>(GetX(), GetY(), m_gw));
+        m_gw->Sethand(NOTHING);
+        break;
     default:
         break;
     }
@@ -67,7 +70,7 @@ void Sunflower::Update()
     }
     suntimecorder -= 1;
 }
-void Sunflower::OnClick()
+void Plant::OnClick()
 {
     if (m_gw->GetHand() == SHOVEL)
     {
@@ -114,4 +117,27 @@ void RepeaterSeed::SetSeed()
 void Shovel::SetSeed()
 {
     m_gw->Sethand(SHOVEL);
+}
+
+void Peashooter::Update()
+{
+    if (!shoottime)
+    {
+        m_gw->addobject(std::make_shared<Pea>(GetX(), GetY(), m_gw));
+        shoottime = 30;
+    }
+    shoottime -= 1;
+}
+
+void Pea::Update()
+{
+    if (GetHp())
+    {
+        return;
+    }
+    MoveTo(GetX() + 8, GetY());
+    if (GetX() >= WINDOW_WIDTH)
+    {
+        SetHp(0);
+    }
 }
