@@ -22,6 +22,7 @@ void Sun::Update()
     {
         SetHp(0);
     }
+    m_falltime -= 1;
 }
 void Seed::OnClick()
 {

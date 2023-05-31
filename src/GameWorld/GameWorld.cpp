@@ -36,6 +36,21 @@ void GameWorld::UpdateObjects()
     object->Update();
   }
 }
+void GameWorld::ClearDeadObjects()
+{
+  for (auto it = GameObjects.begin(); it != GameObjects.end();)
+  {
+    if ((*it)->GetHp() <= 0)
+    {
+      it = GameObjects.erase(it); // 删除对象并更新迭代器
+    }
+    else
+    {
+      ++it; // 移动到下一个对象
+    }
+  }
+}
+
 LevelStatus GameWorld::Update()
 {
   // YOUR CODE HERE
