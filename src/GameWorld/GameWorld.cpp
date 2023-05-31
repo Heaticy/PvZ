@@ -43,7 +43,7 @@ LevelStatus GameWorld::Update()
   if ((m_time - 180) % 300 == 0)
   {
     Random ran(75, WINDOW_WIDTH - 75);
-    addobject(std::make_shared<Sun>(ran.generateRandomNumber(), WINDOW_HEIGHT - 1, 0, shared_from_this()));
+    addobject(std::make_shared<Sun>(ran.generateRandomNumber(), WINDOW_HEIGHT - 1, 1, shared_from_this()));
   }
   UpdateObjects();
   return LevelStatus::ONGOING;
