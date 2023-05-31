@@ -6,9 +6,9 @@
 
 #include "WorldBase.hpp"
 #include "utils.hpp"
-
-
-class GameWorld : public WorldBase, public std::enable_shared_from_this<GameWorld> {
+#include "GameObject.hpp"
+class GameWorld : public WorldBase, public std::enable_shared_from_this<GameWorld>
+{
 public:
   // Use shared_from_this() instead of "this".
   GameWorld();
@@ -20,8 +20,13 @@ public:
 
   void CleanUp() override;
 
-private: 
+  void addobject(pGameObject object)
+  {
+    GameObjects.push_back(object);
+  }
 
+private:
+  std::list<pGameObject> GameObjects;
 };
 
 #endif // !GAMEWORLD_HPP__

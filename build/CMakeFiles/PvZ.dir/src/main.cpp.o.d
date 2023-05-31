@@ -237,4 +237,6 @@ CMakeFiles/PvZ.dir/src/main.cpp.o: \
  /media/psf/Home/Desktop/PvZ/src/GameWorld/GameWorld.hpp \
  /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/list.tcc \
- /media/psf/Home/Desktop/PvZ/src/Framework/WorldBase.hpp
+ /media/psf/Home/Desktop/PvZ/src/Framework/WorldBase.hpp \
+ /media/psf/Home/Desktop/PvZ/src/GameObject/GameObject.hpp \
+ /media/psf/Home/Desktop/PvZ/src/Framework/ObjectBase.hpp

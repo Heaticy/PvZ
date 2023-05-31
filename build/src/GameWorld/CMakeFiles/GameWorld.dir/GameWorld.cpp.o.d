@@ -231,4 +231,6 @@ src/GameWorld/CMakeFiles/GameWorld.dir/GameWorld.cpp.o: \
  /usr/include/c++/11/bits/locale_conv.h /usr/include/c++/11/iomanip \
  /usr/include/c++/11/bits/quoted_string.h /usr/include/c++/11/sstream \
  /usr/include/c++/11/bits/sstream.tcc /usr/include/c++/11/codecvt \
- /usr/include/c++/11/bits/fs_dir.h /usr/include/c++/11/bits/fs_ops.h
+ /usr/include/c++/11/bits/fs_dir.h /usr/include/c++/11/bits/fs_ops.h \
+ /media/psf/Home/Desktop/PvZ/src/GameObject/GameObject.hpp \
+ /media/psf/Home/Desktop/PvZ/src/Framework/ObjectBase.hpp
