@@ -72,6 +72,7 @@ void Sunflower::OnClick()
     if (m_gw->GetHand() == SHOVEL)
     {
         SetHp(0);
+        m_gw->Sethand(NOTHING);
     }
 }
 void Shovel::OnClick()
