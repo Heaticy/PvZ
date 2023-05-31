@@ -35,7 +35,7 @@ public:
   {
     m_hp = hp;
   }
-  int GetHp()
+  int GetHp() const
   {
     return m_hp;
   }
@@ -135,7 +135,7 @@ public:
   {
     return -1;
   }
-  int Getprice()
+  int Getprice() const
   {
     return m_price;
   }

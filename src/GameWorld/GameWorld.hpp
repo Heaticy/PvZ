@@ -30,15 +30,17 @@ public:
   {
     m_hand = hand;
   }
-  int GetHand()
+  int GetHand() const
   {
     return m_hand;
   }
   void addCooldowndmask(int x, int y, int cdtime);
+  void UpdateObjects();
 
 private:
   std::list<pGameObject> GameObjects;
   int m_hand = 0;
+  int m_time = 0;
 };
 
 #endif // !GAMEWORLD_HPP__

@@ -61,7 +61,7 @@ void Sunflower::Update()
 {
     if (!suntimecorder)
     {
-        m_gw->addobject(std::make_shared<Sun>(GetX(), GetX(), 0, m_gw));
+        m_gw->addobject(std::make_shared<Sun>(GetX(), GetY(), 0, m_gw));
         suntimecorder = 600;
     }
     suntimecorder -= 1;
