@@ -95,4 +95,9 @@ using SeedID = int;
 const SeedID SUNFLOWERSEED = 1;
 const SeedID NOTHING = 0;
 const SeedID SHOVEL = -1;
+const SeedID PEASHOOTERSEED = 2;
+const SeedID CHERRYBOMBSEED = 4;
+const SeedID REPEATERSEED = 5;
+const SeedID WALLNUTSEED = 3;
+
 #endif // !UTILS_HPP__

@@ -23,6 +23,11 @@ void GameWorld::Init()
 
   // Create seeds
   addobject(std::make_shared<SunflowerSeed>(shared_from_this()));
+  addobject(std::make_shared<PeashooterSeed>(shared_from_this()));
+  addobject(std::make_shared<WallnutSeed>(shared_from_this()));
+  addobject(std::make_shared<CherryBombSeed>(shared_from_this()));
+  addobject(std::make_shared<RepeaterSeed>(shared_from_this()));
+  addobject(std::make_shared<Shovel>(shared_from_this()));
 }
 
 LevelStatus GameWorld::Update()

@@ -49,6 +49,7 @@ void PlantingSpot::OnClick()
         break;
     case SUNFLOWERSEED:
         m_gw->addobject(std::make_shared<Sunflower>(GetX(), GetY(), m_gw));
+        m_gw->Sethand(NOTHING);
         break;
 
     default:
@@ -72,8 +73,43 @@ void Sunflower::OnClick()
         SetHp(0);
     }
 }
-
+void Shovel::OnClick()
+{
+    if (m_gw->GetHand() == SHOVEL)
+    {
+        m_gw->Sethand(NOTHING);
+        return;
+    }
+    else if (m_gw->GetHand() == NOTHING)
+    {
+        SetSeed();
+    }
+    else
+    {
+        return;
+    }
+}
 void SunflowerSeed::SetSeed()
 {
     m_gw->Sethand(SUNFLOWERSEED);
+}
+void WallnutSeed::SetSeed()
+{
+    m_gw->Sethand(WALLNUTSEED);
+}
+void PeashooterSeed::SetSeed()
+{
+    m_gw->Sethand(PEASHOOTERSEED);
+}
+void CherryBombSeed::SetSeed()
+{
+    m_gw->Sethand(CHERRYBOMBSEED);
+}
+void RepeaterSeed::SetSeed()
+{
+    m_gw->Sethand(REPEATERSEED);
+}
+void Shovel::SetSeed()
+{
+    m_gw->Sethand(SHOVEL);
 }
