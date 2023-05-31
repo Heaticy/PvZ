@@ -20,6 +20,9 @@ void GameWorld::Init()
   }
   // Create Background
   addobject(std::make_shared<Background>());
+
+  // Create seeds
+  addobject(std::make_shared<SunflowerSeed>(shared_from_this()));
 }
 
 LevelStatus GameWorld::Update()
@@ -33,4 +36,8 @@ void GameWorld::CleanUp()
   // YOUR CODE HERE
   SetWave(0);
   SetSun(50);
+}
+void GameWorld::addCooldowndmask(int x, int y, int cdtime)
+{
+  addobject(std::make_shared<CooldownMask>(x, y, cdtime));
 }

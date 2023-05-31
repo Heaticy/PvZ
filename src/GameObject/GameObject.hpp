@@ -24,28 +24,26 @@ public:
 // Declares the class name GameWorld so that its pointers can be used.
 class GameWorld;
 using pGameWorld = std::shared_ptr<GameWorld>;
+
 class GameObject : public ObjectBase, public std::enable_shared_from_this<GameObject>
 {
 public:
   using std::enable_shared_from_this<GameObject>::shared_from_this; // Use shared_from_this() instead of "this".
-  GameObject(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID) : ObjectBase(imageID, x, y, layer, width, height, animID)
-  {
-  }
-  GameObject(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID, int hp) : ObjectBase(imageID, x, y, layer, width, height, animID), m_hp(hp)
-  {
-  }
+  GameObject(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID) : ObjectBase(imageID, x, y, layer, width, height, animID) {}
+  GameObject(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID, int hp) : ObjectBase(imageID, x, y, layer, width, height, animID), m_hp(hp) {}
   void SetHp(int hp)
   {
     m_hp = hp;
   }
-
+  int GetHp()
+  {
+    return m_hp;
+  }
   virtual int isZombie() = 0;
 
 protected:
   int m_hp = 1;
 };
-
-using pGameObject = std::shared_ptr<GameObject>;
 
 class Background : public GameObject
 {
@@ -62,7 +60,7 @@ public:
 class Sun : public GameObject
 {
 public:
-  Sun(int x, int y, bool z) : GameObject(IMGID_SUN, x, y, LAYER_SUN, 80, 80, ANIMID_IDLE_ANIM), m_isfromsky(z)
+  Sun(int x, int y, bool z, pGameWorld gw) : GameObject(IMGID_SUN, x, y, LAYER_SUN, 80, 80, ANIMID_IDLE_ANIM), m_isfromsky(z), m_gw(gw)
   {
     if (z)
     {
@@ -74,28 +72,8 @@ public:
       m_falltime = 12;
     }
   }
-  void OnClick()
-  {
-    SetHp(-2500);
-  }
-  void Update()
-  {
-    if (m_falltime > 0)
-    {
-      if (m_isfromsky)
-      {
-        MoveTo(GetX(), GetY() - 2);
-      }
-      else
-      {
-        MoveTo(GetX() - 1, GetY() + 4 - (12 - m_falltime));
-      }
-    }
-    if (m_falltime < -300)
-    {
-      SetHp(0);
-    }
-  }
+  void OnClick();
+  void Update();
   int isZombie()
   {
     return -1;
@@ -104,17 +82,65 @@ public:
 private:
   int m_falltime;
   bool m_isfromsky;
+  pGameWorld m_gw;
 };
 
 class PlantingSpot : public GameObject
 {
 public:
-  PlantingSpot(int x, int y) : GameObject(IMGID_WALLNUT, x, y, LAYER_UI, 60, 80, ANIMID_NO_ANIMATION) {}
+  PlantingSpot(int x, int y) : GameObject(IMGID_NONE, x, y, LAYER_UI, 60, 80, ANIMID_NO_ANIMATION) {}
   void OnClick() {}
   void Update() {}
   int isZombie()
   {
     return -1;
   }
+};
+
+class CooldownMask : public GameObject
+{
+public:
+  CooldownMask(int x, int y, int cdtime) : GameObject(IMGID_COOLDOWN_MASK, x, y, LAYER_COOLDOWN_MASK, 50, 70, ANIMID_NO_ANIMATION)
+  {
+    SetHp(cdtime);
+  }
+  void OnClick()
+  {
+  }
+  void Update()
+  {
+    SetHp(GetHp() - 1);
+  }
+  int isZombie()
+  {
+    return -1;
+  }
+};
+
+class Seed : public GameObject
+{
+private:
+  int m_price;
+  int m_cd;
+  pGameWorld m_gw;
+
+public:
+  Seed(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID, int price, int cd, pGameWorld gw) : GameObject(imageID, x, y, layer, width, height, animID), m_cd(cd), m_price(price), m_gw(gw) {}
+  int isZombie()
+  {
+    return -1;
+  }
+  int Getprice()
+  {
+    return m_price;
+  }
+  void OnClick();
+  void Update() {}
+};
+
+class SunflowerSeed : public Seed
+{
+public:
+  SunflowerSeed(pGameWorld gw) : Seed(IMGID_SEED_SUNFLOWER, 130, WINDOW_HEIGHT - 44, LAYER_UI, 50, 70, ANIMID_NO_ANIMATION, 50, 240, gw) {}
 };
 #endif // !GAMEOBJECT_HPP__

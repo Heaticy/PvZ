@@ -6,7 +6,9 @@
 
 #include "WorldBase.hpp"
 #include "utils.hpp"
-#include "GameObject.hpp"
+
+class GameObject;
+using pGameObject = std::shared_ptr<GameObject>;
 class GameWorld : public WorldBase, public std::enable_shared_from_this<GameWorld>
 {
 public:
@@ -24,9 +26,19 @@ public:
   {
     GameObjects.push_back(object);
   }
+  void SetShovel(int shovel)
+  {
+    m_shovel = shovel;
+  }
+  int GetShovel()
+  {
+    return m_shovel;
+  }
+  void addCooldowndmask(int x, int y, int cdtime);
 
 private:
   std::list<pGameObject> GameObjects;
+  int m_shovel = 0;
 };
 
 #endif // !GAMEWORLD_HPP__
