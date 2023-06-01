@@ -9,8 +9,8 @@
 
 #include "utils.hpp"
 
-
-class WorldBase {
+class WorldBase
+{
 public:
   WorldBase();
   virtual ~WorldBase();
@@ -31,6 +31,5 @@ private:
   int m_wave;
   int m_sun;
 };
-
 
 #endif // !WORLDBASE_H__

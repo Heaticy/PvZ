@@ -41,6 +41,10 @@ target_link_libraries(
   ${PROJECT_NAME}
   Framework
   GameWorld
+  Environments
+  Plants
+  Seeds
+  Zombies
 )
 
 target_include_directories(
