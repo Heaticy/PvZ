@@ -77,28 +77,29 @@ void Sunflower::Update()
     }
     suntimecorder -= 1;
 }
-static int flag = 1;
+
 void Peashooter::Update()
 {
     if (!GetHp())
     {
         return;
     }
+    static int NoZombieOnRight = 1;
     if (!shoottime)
     {
-        flag = 1;
+        NoZombieOnRight = 1;
         for (auto &zombie : m_gw->Getlist())
         {
-            if (zombie->isZombie() == 1)
+            if (zombie->GetCategory() == ZOMBIE)
             {
                 if (zombie->GetY() == GetY() && zombie->GetX() > GetX())
                 {
-                    flag = 0;
+                    NoZombieOnRight = 0;
                     break;
                 }
             }
         }
-        if (flag)
+        if (NoZombieOnRight)
         {
             return;
         }
@@ -117,23 +118,23 @@ void Repeater::Update()
     {
         return;
     }
-    int flag = 1;
+    static int NoZombieOnRight = 1;
     if (!shoottime)
     {
 
-        flag = 1;
+        NoZombieOnRight = 1;
         for (auto &zombie : m_gw->Getlist())
         {
-            if (zombie->isZombie() == 1)
+            if (zombie->GetCategory() == ZOMBIE)
             {
                 if (zombie->GetY() == GetY() && zombie->GetX() > GetX())
                 {
-                    flag = 0;
+                    NoZombieOnRight = 0;
                     break;
                 }
             }
         }
-        if (flag)
+        if (NoZombieOnRight)
         {
             return;
         }

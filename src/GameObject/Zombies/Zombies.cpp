@@ -64,7 +64,7 @@ void PoleVaultingZombie::Update()
         MoveTo(GetX() - 40, GetY());
         for (auto &project : m_gw->Getlist())
         {
-            if (project->isZombie() == 0)
+            if (project->GetCategory() == PLANT)
             {
                 int ax1 = project->GetX() + project->GetWidth() / 2;
                 int ax2 = project->GetX() - project->GetWidth() / 2;

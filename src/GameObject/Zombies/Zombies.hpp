@@ -8,9 +8,9 @@ class Zombie : public GameObject
 public:
     Zombie(int x, int y, pGameWorld gw, AnimID animID) : GameObject(IMGID_REGULAR_ZOMBIE, x, y, LAYER_ZOMBIES, 20, 80, animID), m_gw(gw) {}
     void OnClick(){};
-    int isZombie()
+    int GetCategory()
     {
-        return 1;
+        return ZOMBIE;
     }
     void Update();
     void collision(int)

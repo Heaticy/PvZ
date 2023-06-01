@@ -40,7 +40,7 @@ public:
   {
     return m_hp;
   }
-  virtual int isZombie() = 0;
+  virtual int GetCategory() = 0;
   virtual void collision() {}
   virtual void collision(int) {}
   virtual void explosion() {}

@@ -10,9 +10,9 @@ public:
     PlantingSpot(int x, int y, pGameWorld gw) : GameObject(IMGID_NONE, x, y, LAYER_UI, 60, 80, ANIMID_NO_ANIMATION), m_gw(gw) {}
     void OnClick();
     void Update() {}
-    int isZombie()
+    int GetCategory()
     {
-        return -1;
+        return ENVIRONMENT;
     }
 
 private:
@@ -35,9 +35,9 @@ public:
     }
     void OnClick();
     void Update();
-    int isZombie()
+    int GetCategory()
     {
-        return -1;
+        return ENVIRONMENT;
     }
 
 private:
@@ -49,9 +49,9 @@ class Plant : public GameObject
 {
 public:
     Plant(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID, pGameWorld gw) : GameObject(imageID, x, y, layer, width, height, animID), m_gw(gw) {}
-    int isZombie()
+    int GetCategory()
     {
-        return 0;
+        return PLANT;
     }
     void OnClick();
     void collision()
@@ -94,9 +94,9 @@ private:
 class Pea : public GameObject
 {
 public:
-    int isZombie()
+    int GetCategory()
     {
-        return 2;
+        return PEA;
     }
     Pea(int x, int y, pGameWorld gw) : GameObject(IMGID_PEA, x, y, LAYER_PROJECTILES, 28, 28, ANIMID_NO_ANIMATION), m_gw(gw) {}
     void Update();
@@ -138,9 +138,9 @@ private:
 class Explosion : public GameObject
 {
 public:
-    int isZombie()
+    int GetCategory()
     {
-        return 3;
+        return EXPLOSION;
     }
     Explosion(int x, int y, pGameWorld gw) : GameObject(IMGID_EXPLOSION, x, y, LAYER_PROJECTILES, 3 * LAWN_GRID_WIDTH, 3 * LAWN_GRID_HEIGHT, ANIMID_NO_ANIMATION), m_gw(gw) {}
     void Update();

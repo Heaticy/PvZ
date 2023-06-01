@@ -17,9 +17,9 @@ public:
     {
         SetHp(GetHp() - 1);
     }
-    int isZombie()
+    int GetCategory()
     {
-        return -1;
+        return SEED;
     }
 };
 
@@ -34,9 +34,9 @@ protected:
 
 public:
     Seed(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID, int price, int cd, pGameWorld gw) : GameObject(imageID, x, y, layer, width, height, animID), m_cd(cd), m_price(price), m_gw(gw) {}
-    int isZombie()
+    int GetCategory()
     {
-        return -1;
+        return SEED;
     }
     int Getprice() const
     {

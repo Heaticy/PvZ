@@ -1,5 +1,9 @@
 #include "GameWorld.hpp"
 #include "GameObject.hpp"
+#include "Environments.hpp"
+#include "Plants.hpp"
+#include "Seeds.hpp"
+#include "Zombies.hpp"
 GameWorld::GameWorld() {}
 
 GameWorld::~GameWorld() {}
@@ -119,11 +123,11 @@ LevelStatus GameWorld::Update()
   // 5.检测碰撞
   for (auto &zombie : GameObjects)
   {
-    if (zombie->isZombie() == 1)
+    if (zombie->GetCategory() == ZOMBIE)
     {
       for (auto &project : GameObjects)
       {
-        if (project->isZombie() == 2)
+        if (project->GetCategory() == PEA)
         {
           int ax1 = project->GetX() + project->GetWidth() / 2;
           int ax2 = project->GetX() - project->GetWidth() / 2;
@@ -146,7 +150,7 @@ LevelStatus GameWorld::Update()
       }
       for (auto &project : GameObjects)
       {
-        if (project->isZombie() == 3)
+        if (project->GetCategory() == EXPLOSION)
         {
           int ax1 = project->GetX() + project->GetWidth() / 2;
           int ax2 = project->GetX() - project->GetWidth() / 2;
@@ -169,7 +173,7 @@ LevelStatus GameWorld::Update()
       }
       for (auto &project : GameObjects)
       {
-        if (project->isZombie() == 0)
+        if (project->GetCategory() == PLANT)
         {
           int ax1 = project->GetX() + project->GetWidth() / 2;
           int ax2 = project->GetX() - project->GetWidth() / 2;
@@ -199,7 +203,7 @@ LevelStatus GameWorld::Update()
   int flag = 1;
   for (auto &zombie : GameObjects)
   {
-    if (zombie->isZombie() == 1)
+    if (zombie->GetCategory() == ZOMBIE)
     {
       if (zombie->GetX() < 0)
       {
@@ -210,7 +214,7 @@ LevelStatus GameWorld::Update()
         for (auto &project : GameObjects)
         {
           flag = 1;
-          if (project->isZombie() == 0)
+          if (project->GetCategory() == PLANT)
           {
             int ax1 = project->GetX() + project->GetWidth() / 2;
             int ax2 = project->GetX() - project->GetWidth() / 2;
