@@ -62,19 +62,25 @@ double generateRandomFloat()
 LevelStatus GameWorld::Update()
 {
   // YOUR CODE HERE
+  // 1.加入阳光
   m_time += 1;
   if ((m_time - 180) % 300 == 0)
   {
     Random ran(75, WINDOW_WIDTH - 75);
     addobject(std::make_shared<Sun>(ran.generateRandomNumber(), WINDOW_HEIGHT - 1, 1, shared_from_this()));
   }
+  // 2.生成僵尸的数量
   if (!m_nextwave)
   {
     m_numZombie = (15 + GetWave()) / 10;
     m_nextwave = std::max(150, 600 - 20 * GetWave());
     SetWave(GetWave() + 1);
   }
-
+  else
+  {
+    m_nextwave -= 1;
+  }
+  // 3.按照概率生成僵尸
   if (m_numZombie > 0)
   {
     int P1 = 20;
@@ -108,7 +114,61 @@ LevelStatus GameWorld::Update()
       m_numZombie -= 1;
     }
   }
+  // 4.更新对象
   UpdateObjects();
+  // 5.检测碰撞
+  for (auto &zombie : GameObjects)
+  {
+    if (zombie->isZombie() == 1)
+    {
+      for (auto &project : GameObjects)
+      {
+        if (project->isZombie() == 2)
+        {
+          int ax1 = project->GetX() + project->GetWidth() / 2;
+          int ax2 = project->GetX() - project->GetWidth() / 2;
+          int ay1 = project->GetY() + project->GetHeight() / 2;
+          int ay2 = project->GetY() - project->GetHeight() / 2;
+
+          int bx1 = zombie->GetX() + zombie->GetWidth() / 2;
+          int bx2 = zombie->GetX() - zombie->GetWidth() / 2;
+          int by1 = zombie->GetY() + zombie->GetHeight() / 2;
+          int by2 = zombie->GetY() - zombie->GetHeight() / 2;
+
+          // 检测碰撞
+          if (ax1 > bx2 && ax2 < bx1 && ay1 > by2 && ay2 < by1)
+          {
+            // 调用collision函数
+            project->collision();
+            zombie->collision(20);
+          }
+        }
+      }
+      for (auto &project : GameObjects)
+      {
+        if (project->isZombie() == 3)
+        {
+          int ax1 = project->GetX() + project->GetWidth() / 2;
+          int ax2 = project->GetX() - project->GetWidth() / 2;
+          int ay1 = project->GetY() + project->GetHeight() / 2;
+          int ay2 = project->GetY() - project->GetHeight() / 2;
+
+          int bx1 = zombie->GetX() + zombie->GetWidth() / 2;
+          int bx2 = zombie->GetX() - zombie->GetWidth() / 2;
+          int by1 = zombie->GetY() + zombie->GetHeight() / 2;
+          int by2 = zombie->GetY() - zombie->GetHeight() / 2;
+
+          // 检测碰撞
+          if (ax1 > bx2 && ax2 < bx1 && ay1 > by2 && ay2 < by1)
+          {
+            // 调用collision函数
+            project->collision();
+            zombie->explosion();
+          }
+        }
+      }
+    }
+  }
   ClearDeadObjects();
   return LevelStatus::ONGOING;
 }

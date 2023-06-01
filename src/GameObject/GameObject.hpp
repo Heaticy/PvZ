@@ -40,6 +40,9 @@ public:
     return m_hp;
   }
   virtual int isZombie() = 0;
+  virtual void collision() {}
+  virtual void collision(int) {}
+  virtual void explosion() {}
 
 protected:
   int m_hp = 1;
@@ -194,6 +197,11 @@ public:
     return 0;
   }
   void OnClick();
+  void collison()
+  {
+    SetHp(GetHp() - 3);
+    return;
+  }
 
 protected:
   pGameWorld m_gw;
@@ -238,6 +246,11 @@ public:
   void Update();
   void OnClick() {}
   // collision
+  int collison()
+  {
+    SetHp(0);
+    return 20;
+  }
 
 private:
   pGameWorld m_gw;
@@ -272,12 +285,16 @@ class Explosion : public GameObject
 public:
   int isZombie()
   {
-    return 2;
+    return 3;
   }
   Explosion(int x, int y, pGameWorld gw) : GameObject(IMGID_EXPLOSION, x, y, LAYER_PROJECTILES, 3 * LAWN_GRID_WIDTH, 3 * LAWN_GRID_HEIGHT, ANIMID_NO_ANIMATION), m_gw(gw) {}
   void Update();
   void OnClick() {}
   // collision
+  void collison()
+  {
+    SetHp(0);
+  }
 
 private:
   pGameWorld m_gw;
@@ -308,6 +325,18 @@ public:
     return 1;
   }
   void Update();
+  void collision(int)
+  {
+    SetHp(GetHp() - 20);
+  }
+  void collision()
+  {
+    PlayAnimation(ANIMID_EAT_ANIM);
+  }
+  void explosion()
+  {
+    SetHp(0);
+  }
 
 protected:
   pGameWorld m_gw;
