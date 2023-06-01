@@ -142,8 +142,22 @@ void Peashooter::Update()
     }
     if (!shoottime)
     {
-        // if(noZomble)
-        // return;
+        int flag = 1;
+        for (auto &zombie : m_gw->Getlist())
+        {
+            if (zombie->isZombie() == 1)
+            {
+                if (zombie->GetY() == GetY())
+                {
+                    flag = 0;
+                    break;
+                }
+            }
+        }
+        if (flag)
+        {
+            return;
+        }
         m_gw->addobject(std::make_shared<Pea>(GetX() + 30, GetY() + 20, m_gw));
         shoottime = 30;
     }

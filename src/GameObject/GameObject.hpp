@@ -198,7 +198,7 @@ public:
     return 0;
   }
   void OnClick();
-  void collison()
+  void collision()
   {
     SetHp(GetHp() - 3);
     return;
