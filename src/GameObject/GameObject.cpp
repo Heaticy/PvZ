@@ -250,6 +250,14 @@ void Zombie::Update()
     {
         return;
     }
+    if (eatting == 1 && GetCurrentAnimation() == ANIMID_WALK_ANIM)
+    {
+        PlayAnimation(ANIMID_EAT_ANIM);
+    }
+    if (eatting == 0 && GetCurrentAnimation() == ANIMID_EAT_ANIM)
+    {
+        PlayAnimation(ANIMID_WALK_ANIM);
+    }
     if (GetCurrentAnimation() == ANIMID_WALK_ANIM)
     {
         MoveTo(GetX() - 1, GetY());
@@ -284,7 +292,7 @@ void PoleVaultingZombie::Update()
         MoveTo(GetX() - 40, GetY());
         for (auto &project : m_gw->Getlist())
         {
-            if (project->isZombie() == 0)
+            if (project->isZombie() == -1)
             {
                 int ax1 = project->GetX() + project->GetWidth() / 2;
                 int ax2 = project->GetX() - project->GetWidth() / 2;
@@ -310,10 +318,11 @@ void PoleVaultingZombie::Update()
     {
         poleVaultingtime -= 1;
     }
-    else
+    else if (poleVaultingtime == 0)
     {
         MoveTo(GetX() - 150, GetY());
         PlayAnimation(ANIMID_WALK_ANIM);
+        poleVaultingtime = -2;
     }
     if (GetCurrentAnimation() == ANIMID_RUN_ANIM)
     {

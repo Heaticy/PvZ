@@ -231,7 +231,7 @@ LevelStatus GameWorld::Update()
         }
         if (flag)
         {
-          zombie->PlayAnimation(ANIMID_WALK_ANIM);
+          zombie->noeat();
         }
       }
     }

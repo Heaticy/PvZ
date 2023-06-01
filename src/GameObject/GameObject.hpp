@@ -43,6 +43,7 @@ public:
   virtual void collision() {}
   virtual void collision(int) {}
   virtual void explosion() {}
+  virtual void noeat() {}
 
 protected:
   int m_hp = 1;
@@ -327,7 +328,11 @@ public:
   }
   void collision()
   {
-    PlayAnimation(ANIMID_EAT_ANIM);
+    eatting = 1;
+  }
+  void noeat()
+  {
+    eatting = 0;
   }
   void explosion()
   {
@@ -336,6 +341,7 @@ public:
 
 protected:
   pGameWorld m_gw;
+  int eatting = 0;
 };
 
 class RegularZombie : public Zombie
