@@ -246,10 +246,9 @@ public:
   void Update();
   void OnClick() {}
   // collision
-  int collison()
+  void collision()
   {
     SetHp(0);
-    return 20;
   }
 
 private:
@@ -291,7 +290,7 @@ public:
   void Update();
   void OnClick() {}
   // collision
-  void collison()
+  void collision()
   {
     SetHp(0);
   }
