@@ -148,7 +148,7 @@ void Peashooter::Update()
         {
             if (zombie->isZombie() == 1)
             {
-                if (zombie->GetY() == GetY())
+                if (zombie->GetY() == GetY() && zombie->GetX() > GetX())
                 {
                     flag = 0;
                     break;
