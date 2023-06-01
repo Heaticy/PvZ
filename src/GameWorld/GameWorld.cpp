@@ -167,17 +167,81 @@ LevelStatus GameWorld::Update()
           }
         }
       }
+      for (auto &project : GameObjects)
+      {
+        if (project->isZombie() == 0)
+        {
+          int ax1 = project->GetX() + project->GetWidth() / 2;
+          int ax2 = project->GetX() - project->GetWidth() / 2;
+          int ay1 = project->GetY() + project->GetHeight() / 2;
+          int ay2 = project->GetY() - project->GetHeight() / 2;
+
+          int bx1 = zombie->GetX() + zombie->GetWidth() / 2;
+          int bx2 = zombie->GetX() - zombie->GetWidth() / 2;
+          int by1 = zombie->GetY() + zombie->GetHeight() / 2;
+          int by2 = zombie->GetY() - zombie->GetHeight() / 2;
+
+          // 检测碰撞
+          if (ax1 > bx2 && ax2 < bx1 && ay1 > by2 && ay2 < by1)
+          {
+            // 调用collision函数
+            project->collision();
+            zombie->collision();
+            break;
+          }
+        }
+      }
     }
   }
+  // 6.删除死亡游戏对象
   ClearDeadObjects();
+  // 7.判断失败
+  int flag = 1;
+  for (auto &zombie : GameObjects)
+  {
+    if (zombie->isZombie() == 1)
+    {
+      if (zombie->GetX() < 0)
+      {
+        return LevelStatus::LOSING;
+      }
+      if (zombie->GetCurrentAnimation() == ANIMID_EAT_ANIM)
+      {
+        for (auto &project : GameObjects)
+        {
+          if (project->isZombie() == 0)
+          {
+            int ax1 = project->GetX() + project->GetWidth() / 2;
+            int ax2 = project->GetX() - project->GetWidth() / 2;
+            int ay1 = project->GetY() + project->GetHeight() / 2;
+            int ay2 = project->GetY() - project->GetHeight() / 2;
+
+            int bx1 = zombie->GetX() + zombie->GetWidth() / 2;
+            int bx2 = zombie->GetX() - zombie->GetWidth() / 2;
+            int by1 = zombie->GetY() + zombie->GetHeight() / 2;
+            int by2 = zombie->GetY() - zombie->GetHeight() / 2;
+
+            // 检测碰撞
+            if (ax1 > bx2 && ax2 < bx1 && ay1 > by2 && ay2 < by1)
+            {
+              flag = 0;
+              break;
+            }
+          }
+        }
+        if (flag)
+        {
+          zombie->PlayAnimation(ANIMID_WALK_ANIM);
+        }
+      }
+    }
+  }
   return LevelStatus::ONGOING;
 }
 
 void GameWorld::CleanUp()
 {
-  // YOUR CODE HERE
-  SetWave(0);
-  SetSun(50);
+  GameObjects.clear();
 }
 void GameWorld::addCooldowndmask(int x, int y, int cdtime)
 {

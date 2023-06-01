@@ -37,6 +37,10 @@ public:
   void addCooldowndmask(int x, int y, int cdtime);
   void UpdateObjects();
   void ClearDeadObjects();
+  std::list<pGameObject> &Getlist()
+  {
+    return GameObjects;
+  }
 
 private:
   std::list<pGameObject> GameObjects;

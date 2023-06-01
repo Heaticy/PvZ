@@ -290,10 +290,7 @@ public:
   void Update();
   void OnClick() {}
   // collision
-  void collision()
-  {
-    SetHp(0);
-  }
+  void collision() {}
 
 private:
   pGameWorld m_gw;
@@ -370,6 +367,9 @@ public:
     ChangeImage(IMGID_POLE_VAULTING_ZOMBIE);
   }
   void Update();
+
+private:
+  int poleVaultingtime = -1;
 };
 
 #endif // !GAMEOBJECT_HPP__
