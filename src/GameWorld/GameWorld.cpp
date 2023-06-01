@@ -9,7 +9,7 @@ void GameWorld::Init()
   // YOUR CODE HERE
 
   SetWave(0);
-  SetSun(50);
+  SetSun(5000);
   // Create Planting Spot
   for (size_t i = 0; i != 5; i++)
   {
@@ -51,6 +51,14 @@ void GameWorld::ClearDeadObjects()
   }
 }
 
+double generateRandomFloat()
+{
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_real_distribution<> dis(0.0, 1.0);
+
+  return dis(gen);
+}
 LevelStatus GameWorld::Update()
 {
   // YOUR CODE HERE
@@ -59,6 +67,46 @@ LevelStatus GameWorld::Update()
   {
     Random ran(75, WINDOW_WIDTH - 75);
     addobject(std::make_shared<Sun>(ran.generateRandomNumber(), WINDOW_HEIGHT - 1, 1, shared_from_this()));
+  }
+  if (!m_nextwave)
+  {
+    m_numZombie = (15 + GetWave()) / 10;
+    m_nextwave = std::max(150, 600 - 20 * GetWave());
+    SetWave(GetWave() + 1);
+  }
+
+  if (m_numZombie > 0)
+  {
+    int P1 = 20;
+    int P2 = 2 * std::max(GetWave() - 8, 0);
+    int P3 = 3 * std::max(GetWave() - 15, 0);
+    int totalProbability = P1 + P2 + P3;
+
+    double normalZombieProbability = static_cast<double>(P1) / totalProbability;
+    double poleVaultingZombieProbability = static_cast<double>(P2) / totalProbability;
+    double bucketheadZombieProbability = static_cast<double>(P3) / totalProbability;
+    Random generateRow(0, 4);
+    Random generateX(WINDOW_WIDTH - 40, WINDOW_WIDTH - 1);
+
+    while (m_numZombie)
+    {
+      double randomFloat = generateRandomFloat();
+      int randomRownumber = generateRow.generateRandomNumber();
+      int randomXnumber = generateX.generateRandomNumber();
+      if (randomFloat <= normalZombieProbability)
+      {
+        addobject(std::make_shared<RegularZombie>(randomXnumber, FIRST_ROW_CENTER + randomRownumber * LAWN_GRID_HEIGHT, shared_from_this()));
+      }
+      else if (randomFloat <= normalZombieProbability + poleVaultingZombieProbability)
+      {
+        addobject(std::make_shared<PoleVaultingZombie>(randomXnumber, FIRST_ROW_CENTER + randomRownumber * LAWN_GRID_HEIGHT, shared_from_this()));
+      }
+      else
+      {
+        addobject(std::make_shared<BucketHeadZombie>(randomXnumber, FIRST_ROW_CENTER + randomRownumber * LAWN_GRID_HEIGHT, shared_from_this()));
+      }
+      m_numZombie -= 1;
+    }
   }
   UpdateObjects();
   ClearDeadObjects();

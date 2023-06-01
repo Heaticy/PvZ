@@ -56,20 +56,23 @@ void PlantingSpot::OnClick()
         m_gw->addobject(std::make_shared<Peashooter>(GetX(), GetY(), m_gw));
         m_gw->Sethand(NOTHING);
         break;
+    case WALLNUTSEED:
+        m_gw->addobject(std::make_shared<Wallnut>(GetX(), GetY(), m_gw));
+        m_gw->Sethand(NOTHING);
+        break;
+    case CHERRYBOMBSEED:
+        m_gw->addobject(std::make_shared<CherryBomb>(GetX(), GetY(), m_gw));
+        m_gw->Sethand(NOTHING);
+        break;
+    case REPEATERSEED:
+        m_gw->addobject(std::make_shared<Repeater>(GetX(), GetY(), m_gw));
+        m_gw->Sethand(NOTHING);
+        break;
     default:
         break;
     }
 }
 
-void Sunflower::Update()
-{
-    if (!suntimecorder)
-    {
-        m_gw->addobject(std::make_shared<Sun>(GetX(), GetY(), 0, m_gw));
-        suntimecorder = 600;
-    }
-    suntimecorder -= 1;
-}
 void Plant::OnClick()
 {
     if (m_gw->GetHand() == SHOVEL)
@@ -118,20 +121,75 @@ void Shovel::SetSeed()
 {
     m_gw->Sethand(SHOVEL);
 }
-
+void Sunflower::Update()
+{
+    if (!GetHp())
+    {
+        return;
+    }
+    if (!suntimecorder)
+    {
+        m_gw->addobject(std::make_shared<Sun>(GetX(), GetY(), 0, m_gw));
+        suntimecorder = 600;
+    }
+    suntimecorder -= 1;
+}
 void Peashooter::Update()
 {
+    if (!GetHp())
+    {
+        return;
+    }
     if (!shoottime)
     {
-        m_gw->addobject(std::make_shared<Pea>(GetX(), GetY(), m_gw));
+        // if(noZomble)
+        // return;
+        m_gw->addobject(std::make_shared<Pea>(GetX() + 30, GetY() + 20, m_gw));
         shoottime = 30;
     }
-    shoottime -= 1;
+    else
+    {
+        shoottime -= 1;
+    }
 }
 
+void Repeater::Update()
+{
+    if (!GetHp())
+    {
+        return;
+    }
+    if (!shoottime)
+    {
+        // if(noZomble)
+        // return;
+        if (doubleshoot == -1)
+        {
+            m_gw->addobject(std::make_shared<Pea>(GetX() + 30, GetY() + 20, m_gw));
+            doubleshoot = 5;
+            return;
+        }
+        else if (doubleshoot > 0)
+        {
+            doubleshoot -= 1;
+            return;
+        }
+        else
+        {
+            m_gw->addobject(std::make_shared<Pea>(GetX() + 30, GetY() + 20, m_gw));
+            shoottime = 25;
+            doubleshoot = -1;
+            return;
+        }
+    }
+    else
+    {
+        shoottime -= 1;
+    }
+}
 void Pea::Update()
 {
-    if (GetHp())
+    if (!GetHp())
     {
         return;
     }
@@ -139,5 +197,93 @@ void Pea::Update()
     if (GetX() >= WINDOW_WIDTH)
     {
         SetHp(0);
+    }
+}
+
+void Wallnut::Update()
+{
+    if (!GetHp())
+    {
+        return;
+    }
+    else if (GetHp() < 4000 / 3)
+    {
+        ChangeImage(IMGID_WALLNUT_CRACKED);
+    }
+}
+
+void CherryBomb::Update()
+{
+    if (!GetHp())
+    {
+        return;
+    }
+    if (!bombtime)
+    {
+        m_gw->addobject(std::make_shared<Explosion>(GetX(), GetY(), m_gw));
+        SetHp(0);
+    }
+    else
+    {
+        bombtime -= 1;
+    }
+}
+void Explosion::Update()
+{
+    if (!GetHp())
+    {
+        return;
+    }
+    if (!bombtime)
+    {
+        SetHp(0);
+    }
+    else
+    {
+        bombtime -= 1;
+    }
+}
+
+void Zombie::Update()
+{
+    if (!GetHp())
+    {
+        return;
+    }
+    if (GetCurrentAnimation() == ANIMID_WALK_ANIM)
+    {
+        MoveTo(GetX() - 1, GetY());
+    }
+}
+
+void BucketHeadZombie::Update()
+{
+    if (!GetHp())
+    {
+        return;
+    }
+    if (GetCurrentAnimation() == ANIMID_WALK_ANIM)
+    {
+        MoveTo(GetX() - 1, GetY());
+    }
+    if (GetHp() <= 200)
+    {
+        ChangeImage(IMGID_REGULAR_ZOMBIE);
+    }
+}
+
+void PoleVaultingZombie::Update()
+{
+    if (!GetHp())
+    {
+        return;
+    }
+    if (GetCurrentAnimation() == ANIMID_WALK_ANIM)
+    {
+        MoveTo(GetX() - 1, GetY());
+    }
+    if (GetHp() <= 200)
+    {
+        ChangeImage(IMGID_REGULAR_ZOMBIE);
     }
 }

@@ -42,6 +42,8 @@ private:
   std::list<pGameObject> GameObjects;
   int m_hand = 0;
   int m_time = 0;
+  int m_nextwave = 1200;
+  int m_numZombie = 0;
 };
 
 #endif // !GAMEWORLD_HPP__

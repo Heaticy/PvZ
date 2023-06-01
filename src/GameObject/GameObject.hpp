@@ -237,9 +237,111 @@ public:
   Pea(int x, int y, pGameWorld gw) : GameObject(IMGID_PEA, x, y, LAYER_PROJECTILES, 28, 28, ANIMID_NO_ANIMATION), m_gw(gw) {}
   void Update();
   void OnClick() {}
+  // collision
 
 private:
   pGameWorld m_gw;
+};
+
+class Wallnut : public Plant
+{
+public:
+  Wallnut(int x, int y, pGameWorld gw) : Plant(IMGID_WALLNUT, x, y, LAYER_PLANTS, 60, 80, ANIMID_IDLE_ANIM, gw)
+  {
+    SetHp(4000);
+  }
+  void Update();
+};
+
+class CherryBomb : public Plant
+{
+public:
+  CherryBomb(int x, int y, pGameWorld gw) : Plant(IMGID_CHERRY_BOMB, x, y, LAYER_PLANTS, 60, 80, ANIMID_IDLE_ANIM, gw)
+  {
+    SetHp(4000);
+  }
+  void Update();
+  void OnClick() {}
+
+private:
+  int bombtime = 15;
+};
+
+class Explosion : public GameObject
+{
+public:
+  int isZombie()
+  {
+    return 2;
+  }
+  Explosion(int x, int y, pGameWorld gw) : GameObject(IMGID_EXPLOSION, x, y, LAYER_PROJECTILES, 3 * LAWN_GRID_WIDTH, 3 * LAWN_GRID_HEIGHT, ANIMID_NO_ANIMATION), m_gw(gw) {}
+  void Update();
+  void OnClick() {}
+  // collision
+
+private:
+  pGameWorld m_gw;
+  int bombtime = 3;
+};
+
+class Repeater : public Plant
+{
+public:
+  Repeater(int x, int y, pGameWorld gw) : Plant(IMGID_REPEATER, x, y, LAYER_PLANTS, 60, 80, ANIMID_IDLE_ANIM, gw)
+  {
+    SetHp(300);
+  }
+  void Update();
+
+private:
+  int shoottime = 0;
+  int doubleshoot = -1;
+};
+
+class Zombie : public GameObject
+{
+public:
+  Zombie(int x, int y, pGameWorld gw, AnimID animID) : GameObject(IMGID_REGULAR_ZOMBIE, x, y, LAYER_ZOMBIES, 20, 80, animID), m_gw(gw) {}
+  void OnClick(){};
+  int isZombie()
+  {
+    return 1;
+  }
+  void Update();
+
+protected:
+  pGameWorld m_gw;
+};
+
+class RegularZombie : public Zombie
+{
+public:
+  RegularZombie(int x, int y, pGameWorld gw) : Zombie(x, y, gw, ANIMID_WALK_ANIM)
+  {
+    SetHp(200);
+  }
+};
+
+class BucketHeadZombie : public Zombie
+{
+public:
+  BucketHeadZombie(int x, int y, pGameWorld gw) : Zombie(x, y, gw, ANIMID_WALK_ANIM)
+  {
+    SetHp(1300);
+    ChangeImage(IMGID_BUCKET_HEAD_ZOMBIE);
+  }
+  void Update();
+};
+
+class PoleVaultingZombie : public Zombie
+{
+public:
+  PoleVaultingZombie(int x, int y, pGameWorld gw) : Zombie(x, y, gw, ANIMID_RUN_ANIM)
+  {
+    SetHp(340);
+    ChangeImage(IMGID_POLE_VAULTING_ZOMBIE);
+  }
+  void Update();
 };
 
 #endif // !GAMEOBJECT_HPP__
