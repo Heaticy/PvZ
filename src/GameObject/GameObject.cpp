@@ -134,6 +134,7 @@ void Sunflower::Update()
     }
     suntimecorder -= 1;
 }
+int flag = 1;
 void Peashooter::Update()
 {
     if (!GetHp())
@@ -142,7 +143,7 @@ void Peashooter::Update()
     }
     if (!shoottime)
     {
-        int flag = 1;
+        flag = 1;
         for (auto &zombie : m_gw->Getlist())
         {
             if (zombie->isZombie() == 1)
@@ -173,10 +174,26 @@ void Repeater::Update()
     {
         return;
     }
+    int flag = 1;
     if (!shoottime)
     {
-        // if(noZomble)
-        // return;
+
+        flag = 1;
+        for (auto &zombie : m_gw->Getlist())
+        {
+            if (zombie->isZombie() == 1)
+            {
+                if (zombie->GetY() == GetY())
+                {
+                    flag = 0;
+                    break;
+                }
+            }
+        }
+        if (flag)
+        {
+            return;
+        }
         if (doubleshoot == -1)
         {
             m_gw->addobject(std::make_shared<Pea>(GetX() + 30, GetY() + 20, m_gw));
@@ -284,6 +301,14 @@ void BucketHeadZombie::Update()
     {
         return;
     }
+    if (eatting == 1 && GetCurrentAnimation() == ANIMID_WALK_ANIM)
+    {
+        PlayAnimation(ANIMID_EAT_ANIM);
+    }
+    if (eatting == 0 && GetCurrentAnimation() == ANIMID_EAT_ANIM)
+    {
+        PlayAnimation(ANIMID_WALK_ANIM);
+    }
     if (GetCurrentAnimation() == ANIMID_WALK_ANIM)
     {
         MoveTo(GetX() - 1, GetY());
@@ -300,13 +325,21 @@ void PoleVaultingZombie::Update()
     {
         return;
     }
-    if (poleVaultingtime < 0)
+    if (eatting == 1 && GetCurrentAnimation() == ANIMID_WALK_ANIM)
+    {
+        PlayAnimation(ANIMID_EAT_ANIM);
+    }
+    if (eatting == 0 && GetCurrentAnimation() == ANIMID_EAT_ANIM)
+    {
+        PlayAnimation(ANIMID_WALK_ANIM);
+    }
+    if (poleVaultingtime == -1)
     {
         // 暂时向左移动40
         MoveTo(GetX() - 40, GetY());
         for (auto &project : m_gw->Getlist())
         {
-            if (project->isZombie() == -1)
+            if (project->isZombie() == 0)
             {
                 int ax1 = project->GetX() + project->GetWidth() / 2;
                 int ax2 = project->GetX() - project->GetWidth() / 2;

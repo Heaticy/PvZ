@@ -9,7 +9,7 @@ void GameWorld::Init()
   // YOUR CODE HERE
 
   SetWave(0);
-  SetSun(5000);
+  SetSun(50);
   // Create Planting Spot
   for (size_t i = 0; i != 5; i++)
   {
@@ -209,6 +209,7 @@ LevelStatus GameWorld::Update()
       {
         for (auto &project : GameObjects)
         {
+          flag = 1;
           if (project->isZombie() == 0)
           {
             int ax1 = project->GetX() + project->GetWidth() / 2;
@@ -242,6 +243,10 @@ LevelStatus GameWorld::Update()
 void GameWorld::CleanUp()
 {
   GameObjects.clear();
+  m_hand = 0;
+  m_time = 0;
+  m_nextwave = 1200;
+  m_numZombie = 0;
 }
 void GameWorld::addCooldowndmask(int x, int y, int cdtime)
 {
