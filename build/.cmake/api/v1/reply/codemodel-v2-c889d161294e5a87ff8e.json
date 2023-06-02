@@ -1,0 +1,315 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "SOIL",
+					"jsonFile" : "directory-SOIL-Release-1cb4cea07115092ce443.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "third_party/SOIL",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "freeglut",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-freeglut-Release-2f32a052d1759635734f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "third_party/freeglut",
+					"targetIndexes" : 
+					[
+						8,
+						9
+					]
+				},
+				{
+					"build" : "src/Framework",
+					"jsonFile" : "directory-src.Framework-Release-45f680046c024438117d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src/Framework",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "src/GameWorld",
+					"jsonFile" : "directory-src.GameWorld-Release-f2358e740ca88c9dcfdc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src/GameWorld",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "src/GameObject",
+					"childIndexes" : 
+					[
+						6,
+						7,
+						8,
+						9
+					],
+					"jsonFile" : "directory-src.GameObject-Release-28c7a48c8a36da260296.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src/GameObject"
+				},
+				{
+					"build" : "src/GameObject/Environments",
+					"jsonFile" : "directory-src.GameObject.Environments-Release-905f9c1fd18d1bbd19cd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 0,
+					"source" : "src/GameObject/Environments",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "src/GameObject/Plants",
+					"jsonFile" : "directory-src.GameObject.Plants-Release-4d0520d3b22a9220c7cd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 0,
+					"source" : "src/GameObject/Plants",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "src/GameObject/Seeds",
+					"jsonFile" : "directory-src.GameObject.Seeds-Release-40bce816092b2f2daaf8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 0,
+					"source" : "src/GameObject/Seeds",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "src/GameObject/Zombies",
+					"jsonFile" : "directory-src.GameObject.Zombies-Release-da0ffa15d55e733c1360.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 0,
+					"source" : "src/GameObject/Zombies",
+					"targetIndexes" : 
+					[
+						7
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9
+					],
+					"name" : "PvZ",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						6,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "SOIL",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "freeglut",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						8,
+						9
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 6,
+					"id" : "Environments::@a2087fd0e9e1bac73506",
+					"jsonFile" : "target-Environments-Release-6a61c112782932dbf1b6.json",
+					"name" : "Environments",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Framework::@bbcc00d4dd4c98727359",
+					"jsonFile" : "target-Framework-Release-98fc5b1532e0620e9b8a.json",
+					"name" : "Framework",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "GameWorld::@2c651ff0fb8a858345be",
+					"jsonFile" : "target-GameWorld-Release-85a0312134e60d47f194.json",
+					"name" : "GameWorld",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "Plants::@5f086fe6fea075bda65c",
+					"jsonFile" : "target-Plants-Release-2ebd77a75f8ce9b1041c.json",
+					"name" : "Plants",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "PvZ::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PvZ-Release-22bb39378ebc8efd7225.json",
+					"name" : "PvZ",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "SOIL::@745e8b768a24c48fa97d",
+					"jsonFile" : "target-SOIL-Release-c618cc22d1065570b3f8.json",
+					"name" : "SOIL",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "Seeds::@544edb0c7446fe093213",
+					"jsonFile" : "target-Seeds-Release-8817e931f13842d7e0ec.json",
+					"name" : "Seeds",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "Zombies::@8092f503cec6915cb86d",
+					"jsonFile" : "target-Zombies-Release-1e54487a2c1c67def063.json",
+					"name" : "Zombies",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "freeglut::@9f489802bb4ec236f2d4",
+					"jsonFile" : "target-freeglut-Release-8b6d03526c7aa8d1d78e.json",
+					"name" : "freeglut",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "freeglut_static::@9f489802bb4ec236f2d4",
+					"jsonFile" : "target-freeglut_static-Release-c6bc9861f5b9755c5fd7.json",
+					"name" : "freeglut_static",
+					"projectIndex" : 2
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/heaticy/CS100/PvZ/build",
+		"source" : "/home/heaticy/CS100/PvZ"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

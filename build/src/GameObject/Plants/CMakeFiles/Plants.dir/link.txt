@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../lib/libPlants.a CMakeFiles/Plants.dir/Plants.cpp.o
+/usr/bin/ranlib ../../../lib/libPlants.a

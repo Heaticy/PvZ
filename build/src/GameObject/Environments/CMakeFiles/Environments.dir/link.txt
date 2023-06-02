@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../lib/libEnvironments.a CMakeFiles/Environments.dir/Environments.cpp.o
+/usr/bin/ranlib ../../../lib/libEnvironments.a
