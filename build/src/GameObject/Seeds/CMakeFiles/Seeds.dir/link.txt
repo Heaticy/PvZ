@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../../lib/libSeeds.a CMakeFiles/Seeds.dir/Seeds.cpp.o
-/usr/bin/ranlib ../../../lib/libSeeds.a

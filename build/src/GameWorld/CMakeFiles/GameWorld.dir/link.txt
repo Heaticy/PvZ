@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../lib/libGameWorld.a CMakeFiles/GameWorld.dir/GameWorld.cpp.o
-/usr/bin/ranlib ../../lib/libGameWorld.a

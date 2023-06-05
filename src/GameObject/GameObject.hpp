@@ -5,7 +5,7 @@
 #include <random>
 
 #include "ObjectBase.hpp"
-
+#include "utils_new.hpp"
 class Random
 {
 private:
