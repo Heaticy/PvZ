@@ -17,7 +17,6 @@ const CategoryID SEED = -1;
 const CategoryID PLANT = 0;
 const CategoryID ENVIRONMENT = -2;
 const CategoryID ZOMBIE = 1;
-const CategoryID PEA = 2;
-const CategoryID EXPLOSION = 3;
+const CategoryID FLYINGOBJECT = 2;
 
 #endif // UTILS_NEW__HPP

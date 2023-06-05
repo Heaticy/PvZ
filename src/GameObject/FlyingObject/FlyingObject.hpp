@@ -3,16 +3,30 @@
 #include "../GameObject.hpp"
 #include "GameWorld.hpp"
 
-class Explosion : public GameObject
+class FlyingObject : public GameObject
 {
 public:
+    FlyingObject(ImageID imageID, int x, int y, LayerID layer, int width, int height, AnimID animID) : GameObject(imageID, x, y, layer, width, height, animID) {}
     int GetCategory()
     {
-        return EXPLOSION;
+        return FLYINGOBJECT;
     }
-    Explosion(int x, int y, pGameWorld gw) : GameObject(IMGID_EXPLOSION, x, y, LAYER_PROJECTILES, 3 * LAWN_GRID_WIDTH, 3 * LAWN_GRID_HEIGHT, ANIMID_NO_ANIMATION), m_gw(gw) {}
-    void Update();
     void OnClick() {}
+    int GetDamage()
+    {
+        return m_damage;
+    }
+
+protected:
+    int m_damage;
+};
+
+class Explosion : public FlyingObject
+{
+public:
+    Explosion(int x, int y, pGameWorld gw) : FlyingObject(IMGID_EXPLOSION, x, y, LAYER_PROJECTILES, 3 * LAWN_GRID_WIDTH, 3 * LAWN_GRID_HEIGHT, ANIMID_NO_ANIMATION), m_gw(gw) { m_damage = 2000; }
+    void Update();
+
     // collision
     void collision() {}
 
@@ -21,16 +35,11 @@ private:
     int bombtime = 3;
 };
 
-class Pea : public GameObject
+class Pea : public FlyingObject
 {
 public:
-    int GetCategory()
-    {
-        return PEA;
-    }
-    Pea(int x, int y, pGameWorld gw) : GameObject(IMGID_PEA, x, y, LAYER_PROJECTILES, 28, 28, ANIMID_NO_ANIMATION), m_gw(gw) {}
+    Pea(int x, int y, pGameWorld gw) : FlyingObject(IMGID_PEA, x, y, LAYER_PROJECTILES, 28, 28, ANIMID_NO_ANIMATION), m_gw(gw) { m_damage = 20; }
     void Update();
-    void OnClick() {}
     // collision
     void collision()
     {

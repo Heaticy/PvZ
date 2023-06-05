@@ -45,6 +45,7 @@ public:
   virtual void collision(int) {}
   virtual void explosion() {}
   virtual void noeat() {}
+  virtual int GetDamage() { return 0; }
 
 protected:
   int m_hp = 1;

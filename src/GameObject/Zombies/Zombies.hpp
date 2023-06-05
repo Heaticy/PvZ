@@ -13,9 +13,9 @@ public:
         return ZOMBIE;
     }
     void Update();
-    void collision(int)
+    void collision(int damage)
     {
-        SetHp(GetHp() - 20);
+        SetHp(GetHp() - damage);
     }
     void collision()
     {
