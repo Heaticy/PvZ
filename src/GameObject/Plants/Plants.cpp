@@ -1,5 +1,7 @@
 #include "Plants.hpp"
 #include "GameWorld.hpp"
+#include "FlyingObject.hpp"
+
 void Sun::OnClick()
 {
     m_gw->SetSun(m_gw->GetSun() + 25);
@@ -162,18 +164,6 @@ void Repeater::Update()
         shoottime -= 1;
     }
 }
-void Pea::Update()
-{
-    if (!GetHp())
-    {
-        return;
-    }
-    MoveTo(GetX() + 8, GetY());
-    if (GetX() >= WINDOW_WIDTH)
-    {
-        SetHp(0);
-    }
-}
 
 void Wallnut::Update()
 {
@@ -196,21 +186,6 @@ void CherryBomb::Update()
     if (!bombtime)
     {
         m_gw->addobject(std::make_shared<Explosion>(GetX(), GetY(), m_gw));
-        SetHp(0);
-    }
-    else
-    {
-        bombtime -= 1;
-    }
-}
-void Explosion::Update()
-{
-    if (!GetHp())
-    {
-        return;
-    }
-    if (!bombtime)
-    {
         SetHp(0);
     }
     else

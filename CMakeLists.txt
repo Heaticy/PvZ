@@ -45,6 +45,7 @@ target_link_libraries(
   Plants
   Seeds
   Zombies
+  FlyingObject
 )
 
 target_include_directories(
