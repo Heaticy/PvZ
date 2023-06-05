@@ -234,3 +234,44 @@ void GameWorld::addCooldowndmask(int x, int y, int cdtime)
 {
   addobject(std::make_shared<CooldownMask>(x, y, cdtime));
 }
+
+void GameWorld::JudgeIfpoleVaulting(pGameObject &&zombie)
+{
+  for (auto &project : GameObjects)
+  {
+    if (project->GetCategory() == PLANT)
+    {
+      int ax1 = project->GetX() + project->GetWidth() / 2;
+      int ax2 = project->GetX() - project->GetWidth() / 2;
+      int ay1 = project->GetY() + project->GetHeight() / 2;
+      int ay2 = project->GetY() - project->GetHeight() / 2;
+
+      int bx1 = zombie->GetX() + zombie->GetWidth() / 2;
+      int bx2 = zombie->GetX() - zombie->GetWidth() / 2;
+      int by1 = zombie->GetY() + zombie->GetHeight() / 2;
+      int by2 = zombie->GetY() - zombie->GetHeight() / 2;
+
+      // 检测碰撞
+      if (ax1 > bx2 && ax2 < bx1 && ay1 > by2 && ay2 < by1)
+      {
+        zombie->PlayAnimation(ANIMID_JUMP_ANIM);
+        zombie->SetPoleVaultingtime(42);
+        return;
+      }
+    }
+  }
+}
+bool GameWorld::JudgeNoZombieOnTheRight(pGameObject &&shooter)
+{
+  for (auto &zombie : GameObjects)
+  {
+    if (zombie->GetCategory() == ZOMBIE)
+    {
+      if (zombie->GetY() == shooter->GetY() && zombie->GetX() > shooter->GetX())
+      {
+        return 0;
+      }
+    }
+  }
+  return 1;
+}

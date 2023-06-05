@@ -46,6 +46,7 @@ public:
   virtual void explosion() {}
   virtual void noeat() {}
   virtual int GetDamage() { return 0; }
+  virtual void SetPoleVaultingtime(int time) {}
 
 protected:
   int m_hp = 1;

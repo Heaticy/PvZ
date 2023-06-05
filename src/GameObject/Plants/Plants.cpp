@@ -89,18 +89,7 @@ void Peashooter::Update()
     static int NoZombieOnRight = 1;
     if (!shoottime)
     {
-        NoZombieOnRight = 1;
-        for (auto &zombie : m_gw->Getlist())
-        {
-            if (zombie->GetCategory() == ZOMBIE)
-            {
-                if (zombie->GetY() == GetY() && zombie->GetX() > GetX())
-                {
-                    NoZombieOnRight = 0;
-                    break;
-                }
-            }
-        }
+        NoZombieOnRight = m_gw->JudgeNoZombieOnTheRight(shared_from_this());
         if (NoZombieOnRight)
         {
             return;
@@ -123,19 +112,7 @@ void Repeater::Update()
     static int NoZombieOnRight = 1;
     if (!shoottime)
     {
-
-        NoZombieOnRight = 1;
-        for (auto &zombie : m_gw->Getlist())
-        {
-            if (zombie->GetCategory() == ZOMBIE)
-            {
-                if (zombie->GetY() == GetY() && zombie->GetX() > GetX())
-                {
-                    NoZombieOnRight = 0;
-                    break;
-                }
-            }
-        }
+        NoZombieOnRight = m_gw->JudgeNoZombieOnTheRight(shared_from_this());
         if (NoZombieOnRight)
         {
             return;

@@ -64,6 +64,10 @@ public:
         ChangeImage(IMGID_POLE_VAULTING_ZOMBIE);
     }
     void Update();
+    void SetPoleVaultingtime(int time)
+    {
+        poleVaultingtime = time;
+    }
 
 private:
     int poleVaultingtime = -1;
