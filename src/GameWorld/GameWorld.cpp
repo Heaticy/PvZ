@@ -76,9 +76,9 @@ LevelStatus GameWorld::Update()
   // 2.生成僵尸的数量
   if (!m_nextwave)
   {
+    SetWave(GetWave() + 1);
     m_numZombie = (15 + GetWave()) / 10;
     m_nextwave = std::max(150, 600 - 20 * GetWave());
-    SetWave(GetWave() + 1);
   }
   else
   {
@@ -90,7 +90,7 @@ LevelStatus GameWorld::Update()
     int P1 = 20;
     int P2 = 2 * std::max(GetWave() - 8, 0);
     int P3 = 3 * std::max(GetWave() - 15, 0);
-    int totalProbability = P1 + P2 + P3;
+    double totalProbability = P1 + P2 + P3;
 
     double normalZombieProbability = static_cast<double>(P1) / totalProbability;
     double poleVaultingZombieProbability = static_cast<double>(P2) / totalProbability;
@@ -178,7 +178,7 @@ LevelStatus GameWorld::Update()
   // 6.删除死亡游戏对象
   ClearDeadObjects();
   // 7.判断失败
-  int flag = 1;
+  static int noeat = 1;
   for (auto &zombie : GameObjects)
   {
     if (zombie->GetCategory() == ZOMBIE)
@@ -191,7 +191,7 @@ LevelStatus GameWorld::Update()
       {
         for (auto &project : GameObjects)
         {
-          flag = 1;
+          noeat = 1;
           if (project->GetCategory() == PLANT)
           {
             int ax1 = project->GetX() + project->GetWidth() / 2;
@@ -207,12 +207,12 @@ LevelStatus GameWorld::Update()
             // 检测碰撞
             if (ax1 > bx2 && ax2 < bx1 && ay1 > by2 && ay2 < by1)
             {
-              flag = 0;
+              noeat = 0;
               break;
             }
           }
         }
-        if (flag)
+        if (noeat)
         {
           zombie->noeat();
         }

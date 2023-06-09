@@ -28,6 +28,7 @@ void Shovel::OnClick()
     else if (m_gw->GetHand() == NOTHING)
     {
         SetSeed();
+        return;
     }
     else
     {
