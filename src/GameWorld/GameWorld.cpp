@@ -90,24 +90,18 @@ LevelStatus GameWorld::Update()
     int P1 = 20;
     int P2 = 2 * std::max(GetWave() - 8, 0);
     int P3 = 3 * std::max(GetWave() - 15, 0);
-    double totalProbability = P1 + P2 + P3;
-
-    double normalZombieProbability = static_cast<double>(P1) / totalProbability;
-    double poleVaultingZombieProbability = static_cast<double>(P2) / totalProbability;
-    double bucketheadZombieProbability = static_cast<double>(P3) / totalProbability;
-    Random generateRow(0, 4);
-    Random generateX(WINDOW_WIDTH - 40, WINDOW_WIDTH - 1);
+    int totalProbability = P1 + P2 + P3;
 
     while (m_numZombie)
     {
-      double randomFloat = generateRandomFloat();
-      int randomRownumber = generateRow.generateRandomNumber();
-      int randomXnumber = generateX.generateRandomNumber();
-      if (randomFloat <= normalZombieProbability)
+      int randomFloat = randInt(0, totalProbability);
+      int randomRownumber = randInt(0, 4);
+      int randomXnumber = randInt(WINDOW_WIDTH - 40, WINDOW_WIDTH - 1);
+      if (randomFloat <= P1)
       {
         addobject(std::make_shared<RegularZombie>(randomXnumber, FIRST_ROW_CENTER + randomRownumber * LAWN_GRID_HEIGHT, shared_from_this()));
       }
-      else if (randomFloat <= normalZombieProbability + poleVaultingZombieProbability)
+      else if (randomFloat <= P1+P2)
       {
         addobject(std::make_shared<PoleVaultingZombie>(randomXnumber, FIRST_ROW_CENTER + randomRownumber * LAWN_GRID_HEIGHT, shared_from_this()));
       }
